@@ -3,7 +3,7 @@ EventHub is a feature-rich, front-end application that simulates a real-world pl
 
 This project serves as an excellent demonstration of complex UI/UX flows, role-based access control, and dynamic data handling, all implemented on the client-side.
 
-✨ Key Features
+# ✨ Key Features
 👤 Multi-User Role System:
 
 Student View: Browse, search, filter, and register for events. A personalized dashboard displays all registered events and allows setting reminders.
@@ -12,7 +12,7 @@ Provider View: A dedicated dashboard for event providers to submit new courses/e
 
 Admin View: A powerful dashboard to review, approve, or reject pending event submissions. Includes an analytics overview to monitor platform statistics.
 
-🔍 Dynamic Event Discovery:
+# 🔍 Dynamic Event Discovery:
 
 Live Search: Instantly find events by title or provider name.
 
@@ -20,7 +20,7 @@ Advanced Filtering: Narrow down the event list by category (e.g., Tech, Business
 
 Flexible Sorting: Organize events by date or title to easily find what you're looking for.
 
-⚡ Interactive & Modern UI/UX:
+# ⚡ Interactive & Modern UI/UX:
 
 Seamless Authentication: Separate, intuitive login modals for each user role, plus a fully functional registration form for new students.
 
@@ -30,7 +30,7 @@ Responsive Design: A beautiful and fully responsive interface that looks great o
 
 User Feedback: Includes non-intrusive toast notifications and confirmation modals for a smooth user experience.
 
-🛠️ Technical Stack
+# 🛠️ Technical Stack
 Front-End: HTML5, Tailwind CSS
 
 Core Logic: Vanilla JavaScript (ES6+)
@@ -41,7 +41,7 @@ Charts: Chart.js (for the Admin Analytics Dashboard)
 
 Fonts: Inter from Google Fonts
 
-🚀 Getting Started
+# 🚀 Getting Started
 To get a local copy up and running, follow these simple steps.
 
 Prerequisites
@@ -58,7 +58,7 @@ cd eventhub-platform
 
 Open the index.html (or the main HTML file) in your browser. That's it!
 
-#🕹️ How to Use
+# 🕹️ How to Use
 The platform is designed to be intuitive. Here’s how to explore the different roles:
 
 Student Experience:
