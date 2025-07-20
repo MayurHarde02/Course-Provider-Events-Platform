@@ -3,7 +3,7 @@ EventHub is a feature-rich, front-end application that simulates a real-world pl
 
 This project serves as an excellent demonstration of complex UI/UX flows, role-based access control, and dynamic data handling, all implemented on the client-side.
 
-#✨ Key Features
+✨ Key Features
 👤 Multi-User Role System:
 
 Student View: Browse, search, filter, and register for events. A personalized dashboard displays all registered events and allows setting reminders.
@@ -12,7 +12,7 @@ Provider View: A dedicated dashboard for event providers to submit new courses/e
 
 Admin View: A powerful dashboard to review, approve, or reject pending event submissions. Includes an analytics overview to monitor platform statistics.
 
-#🔍 Dynamic Event Discovery:
+🔍 Dynamic Event Discovery:
 
 Live Search: Instantly find events by title or provider name.
 
@@ -20,7 +20,7 @@ Advanced Filtering: Narrow down the event list by category (e.g., Tech, Business
 
 Flexible Sorting: Organize events by date or title to easily find what you're looking for.
 
-#⚡ Interactive & Modern UI/UX:
+⚡ Interactive & Modern UI/UX:
 
 Seamless Authentication: Separate, intuitive login modals for each user role, plus a fully functional registration form for new students.
 
@@ -30,7 +30,7 @@ Responsive Design: A beautiful and fully responsive interface that looks great o
 
 User Feedback: Includes non-intrusive toast notifications and confirmation modals for a smooth user experience.
 
-#🛠️ Technical Stack
+🛠️ Technical Stack
 Front-End: HTML5, Tailwind CSS
 
 Core Logic: Vanilla JavaScript (ES6+)
@@ -41,7 +41,7 @@ Charts: Chart.js (for the Admin Analytics Dashboard)
 
 Fonts: Inter from Google Fonts
 
-#🚀 Getting Started
+🚀 Getting Started
 To get a local copy up and running, follow these simple steps.
 
 Prerequisites
@@ -50,7 +50,7 @@ You only need a modern web browser (like Chrome, Firefox, or Edge).
 Installation
 Clone the repository to your local machine:
 
-git clone https://github.com/your-username/eventhub-platform.git
+git clone :https://github.com/MayurHarde02/Course-Provider-Events-Platform
 
 Navigate to the project directory:
 
@@ -87,17 +87,3 @@ Enter the password admin123 to access the admin dashboard.
 
 Here you can approve or reject event submissions from providers and view platform analytics.
 
-#🤝 Contributing
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-
-Fork the Project
-
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-
-Push to the Branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
