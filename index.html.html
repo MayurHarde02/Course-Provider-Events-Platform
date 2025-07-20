@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course & Events Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <header class="bg-gray-900/80 backdrop-blur-lg sticky top-0 z-40 border-b border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="javascript:void(0)" id="home-link" class="text-xl font-bold text-white">EventHub</a>
+                </div>
+                <div id="nav-links" class="flex items-center space-x-4">
+                    <a href="javascript:void(0)" id="pricing-link" class="text-sm font-medium text-gray-300 hover:text-white">Pricing</a>
+                    <a href="javascript:void(0)" id="contact-link" class="text-sm font-medium text-gray-300 hover:text-white">Contact</a>
+                    <a href="javascript:void(0)" id="student-login-btn" class="text-sm font-medium text-gray-300 hover:text-white">Student Login</a>
+                    <a href="javascript:void(0)" id="provider-login-btn" class="text-sm font-medium text-gray-300 hover:text-white">For Providers</a>
+                    <a href="javascript:void(0)" id="admin-login-btn" class="text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg">Admin Login</a>
+                </div>
+                 <div id="student-nav-links" class="hidden items-center space-x-4">
+                    <a href="javascript:void(0)" id="student-dashboard-link" class="text-sm font-semibold text-amber-400">My Dashboard</a>
+                    <a href="javascript:void(0)" id="student-logout-btn" class="text-sm font-medium text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">Logout</a>
+                </div>
+                 <div id="provider-nav-links" class="hidden items-center space-x-4">
+                    <a href="javascript:void(0)" id="provider-dashboard-link" class="text-sm font-semibold text-amber-400">Provider Dashboard</a>
+                    <a href="javascript:void(0)" id="provider-logout-btn" class="text-sm font-medium text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">Logout</a>
+                </div>
+                 <div id="admin-nav-links" class="hidden items-center space-x-4">
+                    <a href="javascript:void(0)" id="admin-dashboard-link" class="text-sm font-semibold text-amber-400">Manage Events</a>
+                    <a href="javascript:void(0)" id="admin-analytics-link" class="text-sm font-semibold text-amber-400">Analytics</a>
+                    <a href="javascript:void(0)" id="admin-logout-btn" class="text-sm font-medium text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <div id="student-view">
+            <section class="text-center mb-12">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">Discover Your Next Opportunity</h1>
+                <p class="max-w-2xl mx-auto text-lg text-gray-300">Browse upcoming courses, webinars, and seminars from top providers in Nagpur. Your next skill is just a click away.</p>
+            </section>
+
+            <section id="controls" class="mb-10 p-6 bg-gray-800 rounded-xl card-shadow">
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+                    <div class="lg:col-span-2 relative">
+                        <label for="search" class="sr-only">Search Events</label>
+                        <input type="text" id="search" placeholder="Search for 'Web Development' or 'Marketing'..." class="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow bg-gray-700 text-white">
+                        <div id="search-suggestions" class="absolute top-full left-0 right-0 bg-gray-700 border border-gray-600 rounded-b-lg mt-1 z-10 hidden"></div>
+                    </div>
+                    <div>
+                        <label for="category-filter" class="sr-only">Category</label>
+                        <select id="category-filter" class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow text-white">
+                            <option value="">All Categories</option>
+                            <option value="Tech">Tech</option>
+                            <option value="Business">Business</option>
+                            <option value="Soft Skills">Soft Skills</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sort" class="sr-only">Sort Events</label>
+                        <select id="sort" class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow text-white">
+                            <option value="date_asc">Sort by Date (Soonest)</option>
+                            <option value="date_desc">Sort by Date (Latest)</option>
+                            <option value="title_asc">Sort by Title (A-Z)</option>
+                        </select>
+                    </div>
+                     <div class="lg:col-span-4 grid grid-cols-2 gap-4 mt-4">
+                        <div>
+                            <label for="level-filter" class="sr-only">Level</label>
+                            <select id="level-filter" class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow text-white">
+                                <option value="">All Levels</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="mode-filter" class="sr-only">Mode</label>
+                            <select id="mode-filter" class="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-shadow text-white">
+                                <option value="">All Modes</option>
+                                <option value="Online">Online</option>
+                                <option value="Offline">Offline</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="events-grid-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Upcoming Events</h2>
+                <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                </div>
+                <div id="no-results" class="hidden text-center py-16">
+                    <h3 class="text-2xl font-semibold text-gray-300">No matching events found.</h3>
+                    <p class="text-gray-400 mt-2">Try adjusting your search or filter criteria.</p>
+                </div>
+                 <div id="pagination-controls" class="mt-12 text-center">
+                    <button id="load-more-btn" class="hidden bg-amber-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-amber-700 transition-colors">Load More</button>
+                </div>
+            </section>
+
+            <section id="how-it-works" class="mt-20 py-16 bg-gray-800/50 rounded-xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-white">How Our Platform Works</h2>
+                    <p class="max-w-2xl mx-auto text-lg text-gray-300 mt-2">A simple and transparent process for everyone involved.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="flow-card">
+                        <h3 class="text-xl font-bold text-center mb-4">1. For Students</h3>
+                        <div class="flow-step"><div class="flow-step-number">1</div><p>Discover events on the main page.</p></div>
+                        <div class="flow-step"><div class="flow-step-number">2</div><p>Login to register for events.</p></div>
+                        <div class="flow-step"><div class="flow-step-number">3</div><p>Set reminders for registered events.</p></div>
+                    </div>
+                    <div class="flow-card">
+                        <h3 class="text-xl font-bold text-center mb-4">2. For Providers</h3>
+                        <div class="flow-step"><div class="flow-step-number">1</div><p>Login to your provider dashboard.</p></div>
+                        <div class="flow-step"><div class="flow-step-number">2</div><p>Submit event details via a simple form.</p></div>
+                        <div class="flow-step"><div class="flow-step-number">3</div><p>Track the approval status of your events.</p></div>
+                    </div>
+                    <div class="flow-card">
+                        <h3 class="text-xl font-bold text-center mb-4">3. For Admins</h3>
+                        <div class="flow-step"><div class="flow-step-number">1</div><p>Log in to the secure admin dashboard.</p></div>
+                        <div class="flow-step"><div class="flow-step-number">2</div><p>Review the queue of submitted events.</p></div>
+                        <div class="flow-step"><div class="flow-step-number">3</div><p>Approve or reject events with one click.</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="provider-dashboard-view" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1">
+                    <div class="bg-gray-800 p-6 rounded-xl card-shadow">
+                        <h2 class="text-2xl font-bold text-white mb-6">Submit a New Event</h2>
+                        <form id="event-form">
+                            <div class="space-y-6">
+                                <div>
+                                    <label for="title" class="block text-sm font-medium text-gray-300">Event Title</label>
+                                    <input type="text" id="title" name="title" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="imageUrl" class="block text-sm font-medium text-gray-300">Image URL</label>
+                                    <input type="url" id="imageUrl" name="imageUrl" placeholder="https://example.com/image.png" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="description" class="block text-sm font-medium text-gray-300">Description</label>
+                                    <textarea id="description" name="description" rows="4" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"></textarea>
+                                </div>
+                                <div>
+                                    <label for="date" class="block text-sm font-medium text-gray-300">Event Date</label>
+                                    <input type="date" id="date" name="date" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-300">Contact Email</label>
+                                    <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                </div>
+                                 <div>
+                                    <label for="event-category" class="block text-sm font-medium text-gray-300">Category</label>
+                                    <select id="event-category" name="category" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                        <option>Tech</option>
+                                        <option>Business</option>
+                                        <option>Soft Skills</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="event-level" class="block text-sm font-medium text-gray-300">Level</label>
+                                    <select id="event-level" name="level" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                        <option>Beginner</option>
+                                        <option>Intermediate</option>
+                                        <option>Advanced</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="event-mode" class="block text-sm font-medium text-gray-300">Mode</label>
+                                    <select id="event-mode" name="mode" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                        <option>Online</option>
+                                        <option>Offline</option>
+                                    </select>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                        Submit for Approval
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="provider-message" class="mt-6 text-center"></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                     <h2 class="text-2xl font-bold text-white mb-6">Your Submitted Events</h2>
+                     <div id="provider-events-list" class="space-y-4"></div>
+                     <div id="no-provider-events" class="hidden text-center py-16">
+                        <h3 class="text-xl font-semibold text-gray-300">You haven't submitted any events yet.</h3>
+                        <p class="text-gray-400 mt-2">Use the form on the left to add your first event.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="student-dashboard-view" class="hidden">
+            <h2 class="text-3xl font-bold text-white mb-6">My Registered Events</h2>
+            <div id="registered-events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+            <div id="no-registered-events" class="hidden text-center py-16">
+                <h3 class="text-2xl font-semibold text-gray-300">You haven't registered for any events yet.</h3>
+                <p class="text-gray-400 mt-2">Click the "Register" button on an event to add it here.</p>
+            </div>
+        </div>
+
+        <div id="admin-view" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gray-800 p-6 rounded-xl shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100">
+                            <i data-lucide="list" class="h-6 w-6 text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-400">Total Events</p>
+                            <p id="total-events-stat" class="text-2xl font-bold text-white">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-yellow-100">
+                            <i data-lucide="clock" class="h-6 w-6 text-yellow-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-400">Pending Approval</p>
+                            <p id="pending-events-stat" class="text-2xl font-bold text-white">0</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100">
+                            <i data-lucide="check-circle" class="h-6 w-6 text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-400">Approved Events</p>
+                            <p id="approved-events-stat" class="text-2xl font-bold text-white">0</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-gray-800 p-6 rounded-xl shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-purple-100">
+                            <i data-lucide="users" class="h-6 w-6 text-purple-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-400">Total Registrations</p>
+                            <p id="total-registrations-stat" class="text-2xl font-bold text-white">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-semibold text-white mb-6">Manage Events</h2>
+            <div id="admin-event-list" class="space-y-4">
+                <p id="no-admin-events-msg" class="text-gray-500 hidden">Loading events...</p>
+            </div>
+        </div>
+
+        <div id="admin-analytics-view" class="hidden">
+            <h2 class="text-3xl font-bold text-white mb-8">Event Analytics</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-6 rounded-xl shadow">
+                    <h3 class="text-xl font-semibold mb-4">Registrations by Category</h3>
+                    <canvas id="category-chart"></canvas>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl shadow">
+                    <h3 class="text-xl font-semibold mb-4">Top 5 Popular Events</h3>
+                    <canvas id="popularity-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div id="pricing-view" class="hidden">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-white">Upgrade your plan</h2>
+            </div>
+            <div class="flex justify-center items-center mb-10">
+                <span class="text-lg font-medium mr-3">Monthly</span>
+                <label class="inline-flex relative items-center cursor-pointer">
+                    <input type="checkbox" value="" class="sr-only peer" id="billing-toggle">
+                    <div class="w-14 h-8 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-1 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-amber-600"></div>
+                </label>
+                <span class="text-lg font-medium ml-3">Yearly <span class="text-sm text-green-500">(Save 30%)</span></span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8 border-t-4 border-gray-600">
+                    <h3 class="text-2xl font-bold text-center mb-4">Starter</h3>
+                    <p class="text-5xl font-extrabold text-center mb-6">$0<span class="text-lg font-medium">/month</span></p>
+                    <p class="text-center text-gray-400 mb-6">free to use / month</p>
+                    <button class="w-full bg-amber-600 text-white font-bold py-3 rounded-lg hover:bg-amber-700 transition-colors">Upgrade</button>
+                    <ul class="mt-8 space-y-4 text-gray-300">
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>30-days free trial</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Low Priority</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Limited courses</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Limited events</li>
+                        <li class="flex items-center"><i data-lucide="x" class="w-5 h-5 text-red-500 mr-2"></i>Can't download</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8 border-t-4 border-amber-600 transform scale-105">
+                     <p class="text-center bg-amber-600 text-white text-sm font-bold py-1 px-4 rounded-full -mt-12 mb-4 inline-block">Most Popular</p>
+                    <h3 class="text-2xl font-bold text-center mb-4">Professional</h3>
+                    <div class="text-center mb-6">
+                        <p class="text-5xl font-extrabold" id="prof-price">$17<span class="text-lg font-medium">/month</span></p>
+                        <p class="text-gray-400" id="prof-billing">Billed monthly</p>
+                    </div>
+                    <button class="w-full bg-amber-600 text-white font-bold py-3 rounded-lg hover:bg-amber-700 transition-colors">Upgrade</button>
+                    <ul class="mt-8 space-y-4 text-gray-300">
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>life-time access</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>High priority</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Access to all the courses</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Access to all the events</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Download available</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Access to mock test</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-800 rounded-lg shadow-lg p-8 border-t-4 border-gray-600">
+                    <h3 class="text-2xl font-bold text-center mb-4">Team</h3>
+                    <div class="text-center mb-6">
+                         <p class="text-5xl font-extrabold" id="team-price">$28<span class="text-lg font-medium">/month</span></p>
+                         <p class="text-gray-400" id="team-billing">Billed monthly</p>
+                    </div>
+                    <button class="w-full bg-amber-600 text-white font-bold py-3 rounded-lg hover:bg-amber-700 transition-colors">Upgrade</button>
+                    <ul class="mt-8 space-y-4 text-gray-300">
+                         <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Life-time access</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>High priority</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Access to all the courses</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Access to all the events</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Download available</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>1 to 1 interview prep & mock test</li>
+                        <li class="flex items-center"><i data-lucide="check" class="w-5 h-5 text-green-500 mr-2"></i>Access to team leaderboard</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="contact-view" class="hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-white">Contact Us</h2>
+                            <p class="mt-2 text-gray-300">Have questions about how Academy Connect can help your institution or learning needs? Get in touch with our team.</p>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4">
+                                <i data-lucide="mail" class="w-6 h-6 text-amber-600 mt-1"></i>
+                                <div>
+                                    <h3 class="text-lg font-semibold">Email</h3>
+                                    <p class="text-gray-300">mayur03harde@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <i data-lucide="phone" class="w-6 h-6 text-amber-600 mt-1"></i>
+                                <div>
+                                    <h3 class="text-lg font-semibold">Phone</h3>
+                                    <p class="text-gray-300">8766507909</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <i data-lucide="building-2" class="w-6 h-6 text-amber-600 mt-1"></i>
+                                <div>
+                                    <h3 class="text-lg font-semibold">Headquarters</h3>
+                                    <p class="text-gray-300">Nagpur<br>Maharashtra,India</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 p-8 rounded-xl card-shadow">
+                        <form id="contact-form">
+                            <div class="space-y-6">
+                                <div>
+                                    <label for="contact-name" class="block text-sm font-medium text-gray-300">Name</label>
+                                    <input type="text" id="contact-name" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-sm font-medium text-gray-300">Email</label>
+                                    <input type="email" id="contact-email" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                </div>
+                                <div>
+                                    <label for="contact-subject" class="block text-sm font-medium text-gray-300">Subject</label>
+                                    <select id="contact-subject" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                                        <option>General Inquiry</option>
+                                        <option>Provider Support</option>
+                                        <option>Student Support</option>
+                                        <option>Partnerships</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="contact-message" class="block text-sm font-medium text-gray-300">Message</label>
+                                    <textarea id="contact-message" rows="4" required class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"></textarea>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="contact-message-response" class="mt-6 text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="provider-profile-view" class="hidden">
+             <button id="back-to-events-btn" class="mb-8 inline-flex items-center text-sm font-medium text-amber-400 hover:text-amber-300">
+                <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                Back to All Events
+            </button>
+            <h2 id="provider-name-header" class="text-3xl font-bold text-white mb-6"></h2>
+            <div id="provider-events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+            <div id="no-provider-profile-events" class="hidden text-center py-16">
+                <h3 class="text-2xl font-semibold text-gray-300">This provider has no upcoming events.</h3>
+            </div>
+        </div>
+
+    </main>
+    
+    <div id="modals-and-footer">
+        <div id="student-auth-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-sm">
+                <h3 class="text-xl font-semibold text-center mb-4">Student Login</h3>
+                <p class="text-center text-sm text-gray-400 mb-4">Use `student@test.com` and `password123` to log in.</p>
+                <form id="student-login-form">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="student-email" class="sr-only">Email</label>
+                            <input type="email" id="student-email" value="student@test.com" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="student-password" class="sr-only">Password</label>
+                            <input type="password" id="student-password" value="password123" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <p id="student-login-error" class="text-red-500 text-sm text-center hidden">Invalid credentials.</p>
+                        <div class="flex items-center justify-between">
+                            <button type="button" id="cancel-student-login-btn" class="text-sm font-medium text-gray-300 hover:text-white">Cancel</button>
+                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <p class="text-center text-sm text-gray-400 mt-6">
+                    Don't have an account? <a href="#" id="show-register-modal-link" class="font-medium text-amber-500 hover:text-amber-400">Sign Up</a>
+                </p>
+            </div>
+        </div>
+        
+        <div id="student-registration-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-sm">
+                <h3 class="text-xl font-semibold text-center mb-4">Create Student Account</h3>
+                <form id="student-registration-form">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="register-name" class="sr-only">Full Name</label>
+                            <input type="text" id="register-name" placeholder="Full Name" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="register-email" class="sr-only">Email</label>
+                            <input type="email" id="register-email" placeholder="Email Address" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="register-password" class="sr-only">Password</label>
+                            <input type="password" id="register-password" placeholder="Password" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="register-confirm-password" class="sr-only">Confirm Password</label>
+                            <input type="password" id="register-confirm-password" placeholder="Confirm Password" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <p id="student-registration-error" class="text-red-500 text-sm text-center hidden">Error message here.</p>
+                        <div class="flex items-center justify-between">
+                            <button type="button" id="cancel-student-registration-btn" class="text-sm font-medium text-gray-300 hover:text-white">Cancel</button>
+                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                Register
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                 <p class="text-center text-sm text-gray-400 mt-6">
+                    Already have an account? <a href="#" id="show-login-modal-link" class="font-medium text-amber-500 hover:text-amber-400">Login</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="provider-auth-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-sm">
+                <h3 class="text-xl font-semibold text-center mb-4">Provider Login</h3>
+                <p class="text-center text-sm text-gray-400 mb-4">Use `provider@test.com` and `password123` to log in.</p>
+                <form id="provider-login-form">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="provider-email" class="sr-only">Email</label>
+                            <input type="email" id="provider-email" value="provider@test.com" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="provider-password" class="sr-only">Password</label>
+                            <input type="password" id="provider-password" value="password123" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <p id="provider-login-error" class="text-red-500 text-sm text-center hidden">Invalid credentials.</p>
+                        <div class="flex items-center justify-between">
+                            <button type="button" id="cancel-provider-login-btn" class="text-sm font-medium text-gray-300 hover:text-white">Cancel</button>
+                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="admin-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-sm">
+                <h3 class="text-xl font-semibold text-center mb-4">Admin Login</h3>
+                <form id="admin-login-form">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="password" class="sr-only">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter password (admin123)" required class="block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <p id="login-error" class="text-red-500 text-sm text-center hidden">Invalid password. Please try again.</p>
+                        <div class="flex items-center justify-between">
+                            <button type="button" id="cancel-login-btn" class="text-sm font-medium text-gray-300 hover:text-white">Cancel</button>
+                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div id="confirmation-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 mb-4">
+                    <i data-lucide="alert-triangle" class="h-6 w-6 text-yellow-600"></i>
+                </div>
+                <h3 class="text-lg leading-6 font-medium text-white" id="modal-title">Confirm Action</h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-400" id="modal-message">Are you sure?</p>
+                </div>
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button id="modal-cancel-btn" class="px-4 py-2 bg-gray-600 text-gray-200 text-base font-medium rounded-lg shadow-sm hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                        Cancel
+                    </button>
+                    <button id="modal-confirm-btn" class="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="event-registration-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+            <div class="bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-lg">
+                <div class="text-center mb-6">
+                    <h3 id="registration-modal-title" class="text-2xl font-bold text-white">Register for Event</h3>
+                    <p class="text-gray-400">Confirm your details to secure your spot.</p>
+                </div>
+                <form id="event-registration-form-modal">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="reg-full-name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                            <input type="text" id="reg-full-name" name="name" required readonly class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none sm:text-sm text-gray-400 cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label for="reg-email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                            <input type="email" id="reg-email" name="email" required readonly class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none sm:text-sm text-gray-400 cursor-not-allowed">
+                        </div>
+                        <div>
+                            <label for="reg-phone" class="block text-sm font-medium text-gray-300">Phone Number (Optional)</label>
+                            <input type="tel" id="reg-phone" name="phone" class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                        </div>
+                        <input type="hidden" id="reg-event-id" name="eventId">
+                    </div>
+                    <div class="mt-8 flex justify-end space-x-4">
+                        <button type="button" id="cancel-registration-btn" class="px-4 py-2 bg-gray-600 text-gray-200 text-base font-medium rounded-lg shadow-sm hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                            Cancel
+                        </button>
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                            Confirm Registration
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="mt-16 border-t border-gray-700">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center text-gray-400">
+                <p>&copy; 2025 EventHub Nagpur. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <div id="toast-notification" class="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg transform translate-x-full opacity-0">
+        <p id="toast-message"></p>
+    </div>
+
+<script src="scripts.js"></script>
+</body>
+</html>

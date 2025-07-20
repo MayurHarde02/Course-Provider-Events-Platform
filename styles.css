@@ -1,0 +1,54 @@
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+        }
+        .card-hover-shadow {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .flow-card {
+            border: 1px solid #374151;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background-color: #1f2937;
+            height: 100%;
+        }
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .flow-step-number {
+            flex-shrink: 0;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            background-color: #374151;
+            color: #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        .modal-overlay, #toast-notification {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .star-rating > input { display: none; }
+        .star-rating > label {
+            color: #4b5563;
+            cursor: pointer;
+            font-size: 2rem;
+        }
+        .star-rating > input:checked ~ label,
+        .star-rating:not(:checked) > label:hover,
+        .star-rating:not(:checked) > label:hover ~ label {
+            color: #f59e0b;
+        }
+        .star-rating > input:checked + label:hover,
+        .star-rating > input:checked ~ label:hover,
+        .star-rating > label:hover ~ input:checked ~ label,
+        .star-rating > input:checked ~ label:hover ~ label {
+            color: #fbbf24;
+        }
